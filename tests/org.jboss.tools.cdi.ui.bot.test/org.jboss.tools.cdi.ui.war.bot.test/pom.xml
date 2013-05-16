@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.jboss.tools</groupId>
+		<artifactId>org.jboss.tools.cdi.ui.bot.test</artifactId>
+		<version>4.1.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>org.jboss.tools.cdi.tests</groupId>
+	<artifactId>org.jboss.tools.cdi.ui.war.bot.test</artifactId>
+
+	<packaging>eclipse-test-plugin</packaging>
+	<properties>
+		<configurations.dir>resources</configurations.dir>
+		<systemProperties>-Dtest.configurations.dir=${configurations.dir} -Dorg.eclipse.swtbot.screenshots.dir=${project.build.outputDirectory}/screenshots -Deap.home=${eap.home} -Deap.version=${eap.version}</systemProperties>
+	</properties>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>sonatype-public-repository</id>
+			<url>https://oss.sonatype.org/content/groups/public</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<configuration>
+					<useUIThread>false</useUIThread>
+					<testSuite>org.jboss.tools.cdi.ui.war.bot.test</testSuite>
+					<testClass>org.jboss.tools.cdi.ui.war.bot.test.CDIWarAllBotTests</testClass>
+					<skip>${swtbot.test.skip}</skip>
+					<appArgLine>-XX:MaxPermSize=1024m</appArgLine>
+					<explodedBundles>
+						<bundle>org.jboss.tools.vpe</bundle>
+						<bundle>org.mozilla.xulrunner.cocoa.macosx</bundle>
+						<bundle>org.mozilla.xulrunner.gtk.linux.x86</bundle>
+						<bundle>org.mozilla.xulrunner.gtk.linux.x86_64</bundle>
+						<bundle>org.mozilla.xulrunner.win32.win32.x86</bundle>
+					</explodedBundles>
+					<dependencies combine.children="append">
+						<dependency>
+							<type>p2-installable-unit</type>
+							<artifactId>org.jboss.tools.cdi.feature.feature.group</artifactId>
+							<version>0.0.0</version>
+						</dependency>
+						<dependency>
+							<type>p2-installable-unit</type>
+							<artifactId>org.jboss.ide.eclipse.as.feature.feature.group</artifactId>
+							<version>0.0.0</version>
+						</dependency>
+<!-- 						<dependency> -->
+<!-- 							<type>p2-installable-unit</type> -->
+<!-- 							<artifactId>org.jboss.tools.ui.bot.ext</artifactId> -->
+<!-- 							<version>0.0.0</version> -->
+<!-- 						</dependency> -->
+						<dependency>
+							<type>p2-installable-unit</type>
+							<artifactId>org.jboss.tools.xulrunner.feature.feature.group</artifactId>
+							<version>0.0.0</version>
+						</dependency>
+					</dependencies>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
