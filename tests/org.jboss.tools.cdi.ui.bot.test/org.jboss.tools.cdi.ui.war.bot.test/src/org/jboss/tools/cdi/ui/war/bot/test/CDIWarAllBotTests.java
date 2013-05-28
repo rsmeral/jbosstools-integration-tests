@@ -22,8 +22,8 @@ import org.junit.runners.Suite;
 	CreateAndVerifyInterceptor.class,
 	CreateAndVerifyDecorator.class,
 	CreateAndVerifyQualifier.class,
-	BeansValidator.class,
 	ELAutoCompletionTest.class
+	BeansValidator.class
 })
 @Server
 public class CDIWarAllBotTests {
