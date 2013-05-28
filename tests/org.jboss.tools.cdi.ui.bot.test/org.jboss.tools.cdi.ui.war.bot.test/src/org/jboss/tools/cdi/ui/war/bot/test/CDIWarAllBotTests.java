@@ -22,7 +22,7 @@ import org.junit.runners.Suite;
 	CreateAndVerifyInterceptor.class,
 	CreateAndVerifyDecorator.class,
 	CreateAndVerifyQualifier.class,
-	ELAutoCompletionTest.class
+	ELAutoCompletionTest.class,
 	BeansValidator.class
 })
 @Server
