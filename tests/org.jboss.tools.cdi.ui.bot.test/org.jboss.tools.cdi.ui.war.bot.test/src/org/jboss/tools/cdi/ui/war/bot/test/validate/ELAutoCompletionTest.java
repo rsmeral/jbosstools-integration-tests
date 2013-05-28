@@ -13,12 +13,20 @@ public class ELAutoCompletionTest extends AbstractCDITest {
 	@Test
 	public void testELAutoCompletion() throws InterruptedException {
 
+		openEditor();
+		verifyNamedBeanELAutoCompletion();
+	}
+
+	private void openEditor(){		
 		SWTBotPreferences.KEYBOARD_LAYOUT = "EN_US";
 		eclipse.openFile(PROJECT_NAME, "WebContent","home.xhtml").toTextEditor();
-
 		util.waitForAll();
-		SWTBotEditorExt editor = SWTTestExt.bot.swtBotEditorExtByTitle("home.xhtml");
+	}
 
+	private void verifyNamedBeanELAutoCompletion(){
+		
+		SWTBotEditorExt editor = SWTTestExt.bot.swtBotEditorExtByTitle("home.xhtml");
+		editor.bot().sleep(3000);
 		ContentAssistBot contentAssist = editor.contentAssist();
 		int idx = 0;
 		for (String line : editor.getLines()) {
@@ -40,7 +48,7 @@ public class ELAutoCompletionTest extends AbstractCDITest {
 			}
 			idx++;
 		}
-		editor.saveAndClose();
+		editor.close();
+		eclipse.closeAllEditors();
 	}
-
 }
